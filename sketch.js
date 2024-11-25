@@ -1,17 +1,22 @@
-function preload() {
-  // put preload code here
-}
 
+let data;
+function preload() {
+  data = loadTable("/assets/riversintheworld.csv", "csv", "header");
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // put setup code here
-  const message =
-    "This is a template repository\nfor the course Laboratorio di Computergrafica\nCommunication Design, Politecnico di Milano";
-  textAlign(CENTER, CENTER);
-  textSize(16);
-  text(message, width / 2, height / 2);
+  let c=color(0, 0, 120);
+  background(c);
+  for(let r=0; r < data.getRowCount(); r++) {
+    const name = data.getString(r, "name");
+    const number = data.getNum(r, "id");
+    const x = random(0, width);
+    const y = random(0, height);
+    noStroke();
+    circle(x,y, number);
+    text(name, x, y);
+    textAlign(CENTER);
+  }
 }
-
 function draw() {
-  // put drawing code here
 }
